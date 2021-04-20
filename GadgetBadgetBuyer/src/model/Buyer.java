@@ -62,6 +62,36 @@ public class Buyer {
 		}
 		return output;
 	}
+	
+	
+	public String insertBuyer(String bname, String baddress, String bemail, String bdate, String pno) {
+		String output = "";
+		try {
+			Connection con = connect();
+			if (con == null) {
+				return "Error while connecting to the database for inserting.";
+			}
+			// create a prepared statement
+			String query = " insert into buyer1(`bID`,`bName`,`bAddress`,`bEmail`,`bDate`,`pNo`)"
+					+ " values (?, ?, ?, ?, ?, ?)";
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+			// binding values
+			preparedStmt.setInt(1, 0);
+			preparedStmt.setString(2, bname);
+			preparedStmt.setString(3, baddress);
+			preparedStmt.setString(4, bemail);
+			preparedStmt.setString(5, bdate);
+			preparedStmt.setString(6, pno);
+			// execute the statement
+			preparedStmt.execute();
+			con.close();
+			output = "Inserted successfully";
+		} catch (Exception e) {
+			output = "Error while inserting the buyer.";
+			System.err.println(e.getMessage());
+		}
+		return output;
+	}
 
 	
 
