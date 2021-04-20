@@ -87,5 +87,41 @@ public class GadgetProduct {
 		}
 		return output;
 	}
+	
+	public String updateProduct(String pId, String pname, String pdate, String price, String pdes) {
+		String output = "";
+
+		try {
+			Connection con = connect();
+
+			if (con == null) {
+				return "Error while connecting to the database for updating.";
+			}
+
+			// create a prepared statement
+			String query = "UPDATE product1 SET pName=?,pDate=?,pPrice=?,pDes=? WHERE pId=?";
+
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+
+			// binding values
+
+			preparedStmt.setString(1, pname);
+			preparedStmt.setString(2, pdate);
+			preparedStmt.setString(3, price);
+			preparedStmt.setString(4, pdes);
+			preparedStmt.setInt(5, Integer.parseInt(pId));
+
+			// execute the statement
+			preparedStmt.execute();
+			con.close();
+
+			output = "Updated successfully";
+		} catch (Exception e) {
+			output = "Error while updating the Product.";
+			System.err.println(e.getMessage());
+		}
+
+		return output;
+	}
 
 }

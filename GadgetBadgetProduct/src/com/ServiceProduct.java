@@ -33,5 +33,25 @@ public class ServiceProduct {
 		return output;
 
 	}
+	
+	@PUT
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+
+	public String updateProduct(String productData) {
+		// Convert the input string to a JSON object
+		JsonObject ProObject = new JsonParser().parse(productData).getAsJsonObject();
+
+		// Read the values from the JSON object
+		String pId = ProObject.get("pId").getAsString();
+		String pName = ProObject.get("pName").getAsString();
+		String pDate = ProObject.get("pDate").getAsString();
+		String pPrice = ProObject.get("pPrice").getAsString();
+		String pDes = ProObject.get("pDes").getAsString();
+
+		String output = ProductObj.updateProduct(pId, pName, pDate, pPrice, pDes);
+		return output;
+	}
 
 }
