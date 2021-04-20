@@ -93,6 +93,40 @@ public class Buyer {
 		return output;
 	}
 
-	
+	public String updateBuyer(String bID, String bname, String baddress, String bemail, String bdate, String pno) {
+		String output = "";
+
+		try {
+			Connection con = connect();
+
+			if (con == null) {
+				return "Error while connecting to the database for updating.";
+			}
+			
+			// create a prepared statement
+			String query = "UPDATE buyer1 SET bName=?,bAddress=?,bEmail=?,bDate=?,pNo=?" + "WHERE bID=?";
+
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+
+			// binding values
+			preparedStmt.setString(1, bname);
+			preparedStmt.setString(2, baddress);
+			preparedStmt.setString(3, bemail);
+			preparedStmt.setString(4, bdate);
+			preparedStmt.setString(5, pno);
+			preparedStmt.setInt(6, Integer.parseInt(bID));
+
+			// execute the statement
+			preparedStmt.execute();
+			con.close();
+
+			output = "Updated successfully";
+		} catch (Exception e) {
+			output = "Error while updating the buyer.";
+			System.err.println(e.getMessage());
+		}
+
+		return output;
+	}
 
 }
