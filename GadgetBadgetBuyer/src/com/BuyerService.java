@@ -58,5 +58,19 @@ public class BuyerService {
 	return output;
 	} 
 	
+	@DELETE
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_XML)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String deleteBuyer(String buyerData)
+	{
+	//Convert the input string to an XML document
+	 Document doc = Jsoup.parse(buyerData, "", Parser.xmlParser());
+
+	//Read the value from the element <itemID>
+	 String bID = doc.select("bID").text();
+	 String output = buyerObj.deleteBuyer(bID);
+	return output;
+	}
 
 }
