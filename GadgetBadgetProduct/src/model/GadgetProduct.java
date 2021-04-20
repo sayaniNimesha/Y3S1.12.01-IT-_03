@@ -59,4 +59,33 @@ public class GadgetProduct {
 		}
 		return output;
 	}
+	
+	public String insertProduct(String pname, String pdate, String price, String pdes) {
+		String output = "";
+		try {
+			Connection con = connect();
+			if (con == null) {
+				return "Error while connecting to the database for inserting.";
+			}
+			// create a prepared statement
+			String query = " insert into product1(`pId`, `pName`, `pDate`, `pPrice`, `pDes`)" + " values ( ?, ?, ?, ?, ?)";
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+			// binding values
+			preparedStmt.setInt(1, 0);
+			preparedStmt.setString(2, pname);
+			preparedStmt.setString(3, pdate);
+			preparedStmt.setString(4, price);
+			preparedStmt.setString(5, pdes);
+
+			// execute the statement
+			preparedStmt.execute();
+			con.close();
+			output = "Inserted successfully";
+		} catch (Exception e) {
+			output = "Error while inserting the product.";
+			System.err.println(e.getMessage());
+		}
+		return output;
+	}
+
 }

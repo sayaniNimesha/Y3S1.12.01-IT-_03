@@ -20,5 +20,18 @@ public class ServiceProduct {
 	public String readProduct() {
 		return ProductObj.readProduct();
 	}
+	
+	@POST
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String insertProduct(@FormParam("pName") String pName, 
+			@FormParam("pDate") String pDate,
+			@FormParam("pPrice") String pPrice,
+			@FormParam("pDes") String pDes) {
+		String output = ProductObj.insertProduct(pName, pDate, pPrice, pDes);
+		return output;
+
+	}
 
 }
