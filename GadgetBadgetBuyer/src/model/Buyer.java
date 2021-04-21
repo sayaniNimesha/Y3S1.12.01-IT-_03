@@ -160,7 +160,7 @@ public class Buyer {
 
 		return output;
 	}
-	
+	//A buyer Details display method
 	public String searchBuyerInfo(int bId) {
 		String output = "";
 		try {

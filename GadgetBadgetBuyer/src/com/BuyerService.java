@@ -73,6 +73,7 @@ public class BuyerService {
 	return output;
 	}
 	
+	//a buyer details display service method
 	@POST
 	@Path("/searchBuyerInformation")
 	@Produces(MediaType.TEXT_HTML)
