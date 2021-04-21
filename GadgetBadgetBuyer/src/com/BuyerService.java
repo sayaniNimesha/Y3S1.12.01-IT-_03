@@ -72,5 +72,13 @@ public class BuyerService {
 	 String output = buyerObj.deleteBuyer(bID);
 	return output;
 	}
+	
+	@POST
+	@Path("/searchBuyerInformation")
+	@Produces(MediaType.TEXT_HTML)
+	public String viewBuyer(@FormParam("bID") int bID)
+	{
+		return buyerObj.searchBuyerInfo(bID);
+	}
 
 }
