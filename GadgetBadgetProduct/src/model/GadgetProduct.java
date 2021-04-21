@@ -155,5 +155,43 @@ public class GadgetProduct {
 
 		return output;
 	}
+	
+	public String searchProduct(int pID) {
+		String output = "";
+		try {
+			Connection con = connect();
+			if (con == null) {
+				return "Error while connecting to the database for reading.";
+		}
+			
+			output = "<table border=\"1\"><tr><th>Product ID</th><th>Product Name</th><th>Date</th><th>Price</th><th>Description</th></tr>";
+			String query = "select * from product1 where pId=?" ;
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+			
+			preparedStmt.setInt(1, pID);
+			ResultSet rs = preparedStmt.executeQuery();
+			
+			while (rs.next()) {
+				String pId = Integer.toString(rs.getInt("pId"));
+				String pName = rs.getString("pName");
+				String pDate = rs.getString("pDate");
+				String pPrice = rs.getString("pPrice");
+				String pDes = rs.getString("pDes");
+
+				output += "<tr><td>" + pId + "</td>";
+				output += "<td>" + pName + "</td>";
+				output += "<td>" + pDate + "</td>";
+				output += "<td>" + pPrice + "</td>";
+				output += "<td>" + pDes + "</td>";
+
+			}
+			con.close();
+			output += "</table>";
+		}catch (Exception e) {
+			output = "Error while reading the product.";
+			System.err.println(e.getMessage());
+		}
+		return output;
+	}
 
 }

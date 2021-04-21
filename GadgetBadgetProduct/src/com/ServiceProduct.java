@@ -67,5 +67,13 @@ public class ServiceProduct {
 		String output = ProductObj.deleteProduct(pId);
 		return output;
 	}
+	
+	@POST
+	@Path("/searchProduct")
+	@Produces(MediaType.TEXT_HTML)
+	public String viewProduct(@FormParam("pId") int pId)
+	{
+		return ProductObj.searchProduct(pId);
+	}
 
 }
