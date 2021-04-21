@@ -32,7 +32,7 @@ public class Buyer {
 				return "Error while connecting to the database for reading.";
 			}
 			// Prepare the html table to be displayed
-			output = "<table border=\"1\"><tr><th>Buyer Name</th><th>Buyer Address</th><th>Buyer Email</th><th>Date</th><th>Buyer Phone No</th></tr>";
+			output = "<table border=\"1\"><tr><th>Buyer ID</th><th>Buyer Name</th><th>Buyer Address</th><th>Buyer Email</th><th>Date</th><th>Buyer Phone No</th></tr>";
 			String query = "select * from buyer1";
 			Statement stmt = (Statement) con.createStatement();
 			ResultSet rs = ((java.sql.Statement) stmt).executeQuery(query);
@@ -46,7 +46,8 @@ public class Buyer {
 				String pNo = rs.getString("pNo");
 
 				// Add into the html table
-				output += "<tr><td>" + bName + "</td>";
+				output += "<tr><td>" + bID + "</td>";
+				output += "<td>" + bName + "</td>";
 				output += "<td>" + bAddress + "</td>";
 				output += "<td>" + bEmail + "</td>";
 				output += "<td>" + bDate + "</td>";
