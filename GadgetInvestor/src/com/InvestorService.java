@@ -65,4 +65,13 @@ public class InvestorService {
 		String output = investorObj.deleteInvestor(fid);
 		return output;
 	}
+	
+	//Search a investor details
+	@POST
+	@Path("/searchInvestor")
+	@Produces(MediaType.TEXT_HTML)
+	public String viewBuyer(@FormParam("fid") int fid)
+	{
+		return investorObj.searchInvestor(fid);
+	}
 }

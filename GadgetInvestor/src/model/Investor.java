@@ -156,4 +156,44 @@ public class Investor {
 		return output;
 	}
 
+	//search a investor
+	public String searchInvestor(int fID) {
+		String output = "";
+		try {
+			Connection con = connect();
+			if (con == null) {
+				return "Error while connecting to the database for reading.";
+			}
+			
+			output = "<table border=\"1\"><tr><th>Investor ID</th><th>Investor Type</th><th>Funding Source</th><th>Funding Amount</th><th>Funding Date</th></tr>";
+			
+			String query = "select * from investor where fid=? ";
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+			
+			preparedStmt.setInt(1, fID);
+			ResultSet rs = preparedStmt.executeQuery();
+			
+			while (rs.next()) {
+				String fid = Integer.toString(rs.getInt("fid"));
+				String ftype = rs.getString("ftype");
+				String fsource = rs.getString("fsource");
+				String famount = Float.toString(rs.getFloat("famount"));
+				String fdate = rs.getString("fdate");
+
+				// Add into the html table
+				output += "<tr><td>" + fid + "</td>";
+				output += "<td>" + ftype + "</td>";
+				output += "<td>" + fsource + "</td>";
+				output += "<td>" + famount + "</td>";
+				output += "<td>" + fdate + "</td>";
+			}
+			con.close();
+			output += "</table>";
+		}catch (Exception e) {
+			output = "Error while reading the buyer.";
+			System.err.println(e.getMessage());
+		}
+		return output;
+	}
+
 }
