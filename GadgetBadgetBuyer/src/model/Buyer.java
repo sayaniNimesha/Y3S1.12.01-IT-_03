@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class Buyer {
-	
+
 	private Connection connect() {
 		Connection con = null;
 		try {
@@ -23,7 +23,7 @@ public class Buyer {
 		}
 		return con;
 	}
-	
+
 	public String readBuyer() {
 		String output = "";
 		try {
@@ -54,8 +54,7 @@ public class Buyer {
 				output += "<td>" + pNo + "</td>";
 			}
 			con.close();
-		
-			
+
 			output += "</table>";
 		} catch (Exception e) {
 			output = "Error while reading the buyer.";
@@ -63,8 +62,7 @@ public class Buyer {
 		}
 		return output;
 	}
-	
-	
+
 	public String insertBuyer(String bname, String baddress, String bemail, String bdate, String pno) {
 		String output = "";
 		try {
@@ -103,7 +101,7 @@ public class Buyer {
 			if (con == null) {
 				return "Error while connecting to the database for updating.";
 			}
-			
+
 			// create a prepared statement
 			String query = "UPDATE buyer1 SET bName=?,bAddress=?,bEmail=?,bDate=?,pNo=?" + "WHERE bID=?";
 
@@ -160,7 +158,8 @@ public class Buyer {
 
 		return output;
 	}
-	//A buyer Details display method
+
+	// A buyer Details display method
 	public String searchBuyerInfo(int bId) {
 		String output = "";
 		try {
@@ -168,15 +167,15 @@ public class Buyer {
 			if (con == null) {
 				return "Error while connecting to the database for reading.";
 			}
-			
+
 			output = "<table border=\"1\"><tr><th>Buyer ID</th><th>Buyer Name</th><th>Buyer Address</th><th>Buyer Email</th><th>Date</th><th>Buyer Phone No</th></tr>";
-			
+
 			String query = "select * from buyer1 where bID=? ";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
-			
+
 			preparedStmt.setInt(1, bId);
 			ResultSet rs = preparedStmt.executeQuery();
-			
+
 			while (rs.next()) {
 				String bID = Integer.toString(rs.getInt("bID"));
 				String bName = rs.getString("bName");
@@ -195,7 +194,7 @@ public class Buyer {
 			}
 			con.close();
 			output += "</table>";
-		}catch (Exception e) {
+		} catch (Exception e) {
 			output = "Error while reading the buyer.";
 			System.err.println(e.getMessage());
 		}
