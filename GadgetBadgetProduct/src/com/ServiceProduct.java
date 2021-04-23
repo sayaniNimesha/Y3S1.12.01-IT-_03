@@ -2,7 +2,6 @@ package com;
 
 import model.GadgetProduct;
 
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import com.google.gson.*;
@@ -20,7 +19,7 @@ public class ServiceProduct {
 	public String readProduct() {
 		return ProductObj.readProduct();
 	}
-	
+
 	@POST
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -29,11 +28,14 @@ public class ServiceProduct {
 			@FormParam("pDate") String pDate,
 			@FormParam("pPrice") String pPrice,
 			@FormParam("pDes") String pDes) {
-		String output = ProductObj.insertProduct(pName, pDate, pPrice, pDes);
+		String output = "";
+		if (pName.length() == 0 || pDate.length() == 0 || pPrice.length() == 0 || pDes.length() == 0) {
+			return "You can not Insert Fields Empty..!";
+		} else
+			output = ProductObj.insertProduct(pName, pDate, pPrice, pDes);
 		return output;
-
 	}
-	
+
 	@PUT
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -53,7 +55,7 @@ public class ServiceProduct {
 		String output = ProductObj.updateProduct(pId, pName, pDate, pPrice, pDes);
 		return output;
 	}
-	
+
 	@DELETE
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_XML)
@@ -67,12 +69,11 @@ public class ServiceProduct {
 		String output = ProductObj.deleteProduct(pId);
 		return output;
 	}
-	
+
 	@POST
 	@Path("/searchProduct")
 	@Produces(MediaType.TEXT_HTML)
-	public String viewProduct(@FormParam("pId") int pId)
-	{
+	public String viewProduct(@FormParam("pId") int pId) {
 		return ProductObj.searchProduct(pId);
 	}
 

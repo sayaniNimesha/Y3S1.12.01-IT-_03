@@ -22,7 +22,7 @@ public class GadgetProduct {
 		}
 		return con;
 	}
-	
+
 	public String readProduct() {
 		String output = "";
 		try {
@@ -59,7 +59,7 @@ public class GadgetProduct {
 		}
 		return output;
 	}
-	
+
 	public String insertProduct(String pname, String pdate, String price, String pdes) {
 		String output = "";
 		try {
@@ -68,7 +68,8 @@ public class GadgetProduct {
 				return "Error while connecting to the database for inserting.";
 			}
 			// create a prepared statement
-			String query = " insert into product1(`pId`, `pName`, `pDate`, `pPrice`, `pDes`)" + " values ( ?, ?, ?, ?, ?)";
+			String query = " insert into product1(`pId`, `pName`, `pDate`, `pPrice`, `pDes`)"
+					+ " values ( ?, ?, ?, ?, ?)";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
 			preparedStmt.setInt(1, 0);
@@ -87,7 +88,7 @@ public class GadgetProduct {
 		}
 		return output;
 	}
-	
+
 	public String updateProduct(String pId, String pname, String pdate, String price, String pdes) {
 		String output = "";
 
@@ -123,7 +124,7 @@ public class GadgetProduct {
 
 		return output;
 	}
-	
+
 	public String deleteProduct(String pId) {
 
 		String output = "";
@@ -155,22 +156,22 @@ public class GadgetProduct {
 
 		return output;
 	}
-	
+
 	public String searchProduct(int pID) {
 		String output = "";
 		try {
 			Connection con = connect();
 			if (con == null) {
 				return "Error while connecting to the database for reading.";
-		}
-			
+			}
+
 			output = "<table border=\"1\"><tr><th>Product ID</th><th>Product Name</th><th>Date</th><th>Price</th><th>Description</th></tr>";
-			String query = "select * from product1 where pId=?" ;
+			String query = "select * from product1 where pId=?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
-			
+
 			preparedStmt.setInt(1, pID);
 			ResultSet rs = preparedStmt.executeQuery();
-			
+
 			while (rs.next()) {
 				String pId = Integer.toString(rs.getInt("pId"));
 				String pName = rs.getString("pName");
@@ -187,7 +188,7 @@ public class GadgetProduct {
 			}
 			con.close();
 			output += "</table>";
-		}catch (Exception e) {
+		} catch (Exception e) {
 			output = "Error while reading the product.";
 			System.err.println(e.getMessage());
 		}
