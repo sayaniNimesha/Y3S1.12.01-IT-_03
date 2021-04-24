@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class Researcher {
-
+	//databse connection part
 	private Connection connect() {
 		Connection con = null;
 		try {
@@ -50,7 +50,7 @@ public class Researcher {
 		}
 		return output;
 	}
-
+	//this is a retrieve part
 	public String readResearcher() {
 		String output = "";
 		try {
