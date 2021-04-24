@@ -50,7 +50,7 @@ public class Researcher {
 		}
 		return output;
 	}
-
+	//this is a retrieve part
 	public String readResearcher() {
 		String output = "";
 		try {
