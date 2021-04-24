@@ -54,7 +54,8 @@ public class ResearcherService {
 		String output = ResearcherObj.updateResearcher(rId, rName, pName, rDate, rDes);
 		return output;
 	}
-
+	
+	//this is delete part
 	@DELETE
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_XML)
